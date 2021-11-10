@@ -1,0 +1,13 @@
+<div class="container">
+    <h4><label for="search-box">Recherchez une personne à partir de son nom</label></h4>
+  
+    <input #searchBox class="form-control" (input)="search(searchBox.value)" />
+  
+    <ul class="search-result list-group my-2">
+      <li class="list-group-item" *ngFor="let personne of personnes$ | async" >
+        <a routerLink="/detailPersonne/{{personne._id}}">
+          {{personne.nom}}   {{personne.prenom}}
+        </a>
+      </li>
+    </ul>
+  </div>

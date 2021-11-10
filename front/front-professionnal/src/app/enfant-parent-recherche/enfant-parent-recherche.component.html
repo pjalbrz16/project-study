@@ -1,0 +1,16 @@
+<div class="container">
+  <h4><label for="search-box">Recherchez un enfant à partir de son nom</label></h4>
+
+  <input #searchBox class="form-control" (input)="search(searchBox.value)" />
+
+  <ul class="search-result list-group my-2">
+    <li class="list-group-item" *ngFor="let enfant of enfants$ | async" >
+      <a (click)="ajoutRelationEnfant(enfant._id)">
+        {{enfant.nom}}   {{enfant.prenom}}
+      </a>
+    </li>
+  </ul>
+  <div class="container" *ngIf="isEnfantAjoute">
+    <p class="ajoute">Le parent a bien été lié à cet enfant !</p>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<h2>Configuration des filtres de la partie</h2>
+<h3>Veuillez choisir dans quel ordre les filtres apparaitront</h3>
+<p>
+<button (click)="filtreParDefaut()">Configuration par défaut</button>
+</p>
+
+<!--<form *ngFor="let filtre of filtres;let i = index" [attr.data-index]="i">
+        <div>
+            <label>Filtre 
+                <select #Filtre>
+                    <option *ngFor='let filtre of filtres' [value]="filtres[i]"  >{{filtre.filtrePositif}} - {{filtre.filtreNegatif}}</option>
+                </select>
+            </label>
+            <button (click)="supprimerFiltre()">Supprimer ce filtre</button>
+        </div>
+        
+    </form>
+-->
+<form class="lesFiltres">
+        <div id='filtre0'>
+            <label>Filtre 
+                <select #filtre0 (change)="changeFiltre0(filtre0.value)">
+                    <option>{{filtres[0].filtrePositif}} - {{filtres[0].filtreNegatif}}</option>
+                    <option>{{filtres[1].filtrePositif}} - {{filtres[1].filtreNegatif}}</option>
+                    <option>{{filtres[2].filtrePositif}} - {{filtres[2].filtreNegatif}}</option>
+                </select>
+            </label>
+            <button (click)="supprimerFiltre0()">Supprimer ce filtre</button>
+        </div>
+        <div id='filtre1'>
+            <label>Filtre 
+                    <select #filtre1 (change)="changeFiltre1(filtre1.value)">
+                        <option>{{filtres[1].filtrePositif}} - {{filtres[1].filtreNegatif}}</option>
+                        <option>{{filtres[0].filtrePositif}} - {{filtres[0].filtreNegatif}}</option>
+                        <option>{{filtres[2].filtrePositif}} - {{filtres[2].filtreNegatif}}</option>
+                    </select>
+                </label>
+                <button (click)="supprimerFiltre1()">Supprimer ce filtre</button>
+        </div>
+        <div id='filtre2'>
+                <label>Filtre 
+                        <select #filtre2 (change)="changeFiltre2(filtre2.value)">
+                            <option>{{filtres[2].filtrePositif}} - {{filtres[2].filtreNegatif}}</option>
+                            <option>{{filtres[1].filtrePositif}} - {{filtres[1].filtreNegatif}}</option>
+                            <option>{{filtres[0].filtrePositif}} - {{filtres[0].filtreNegatif}}</option>
+                        </select>
+                    </label>
+                    <button (click)="supprimerFiltre2()">Supprimer ce filtre</button>
+            </div>
+        
+    </form>
+<p>
+    <button (click)="lancerPartie()">Lancer la partie</button>
+</p>
+
+<div class="lance" *ngIf="isLance">
+    <p>Partie lancée ! L'enfant peut commencer à jouer</p>
+</div>
+
+<!--
+<button (click)="sauvegarderFiltre()">Sauvegarder les filtres</button>
+-->
+

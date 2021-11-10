@@ -1,0 +1,72 @@
+<div class="jumbotron">
+  <div class="container" *ngIf="afficherEnfants">
+    <h6><strong>Liste des enfants</strong></h6>
+    <hr>
+    <ul class="list-group">
+
+      <li class="list-group-item" *ngFor="let enfant of listeEnfants" (click)="onSelectEnfant(enfant)">
+        {{enfant.nom}} {{enfant.prenom}}
+      </li>
+    </ul>
+  </div>
+  <div class="container" *ngIf="afficherListeJeux">
+    <h6><strong>Liste des parties</strong></h6>
+    <ul class="list-group">
+      <hr>
+      <li class="list-group-item" *ngFor="let jeu of jeux" (click)="onSelectJeu(jeu)">
+        {{jeu.date}} {{jeu.demande}}
+      </li>
+      <div class="container p-3">
+        <button class="btn btn-primary" (click)="onBackEnfants(afficherEnfants)">Retour liste enfants</button>
+      </div>
+    </ul>
+  </div>
+  <div class="container" *ngIf="afficherJeu">
+    <div class="row">
+      <div class="col-sm">Demande:</div>
+      <div class="col-sm">{{jeu.demande}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm">Date:</div>
+      <div class="col-sm">{{jeu.date}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm">Filtres utilisés dans la partie:</div>
+      <div class="col-sm">
+        <div class="container">
+          <span class="row" *ngFor="let filtre of filtresEnfant">{{filtre.filtrePositif}} &&
+            {{filtre.filtreNegatif}}</span>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="container">
+      <h5><strong>Choix fait par l'enfant:</strong></h5>
+      <hr>
+      <div class="row" *ngFor="let choice of jeu.choix; let i = index">
+        <div class="col">
+          <img src="{{choice.nomImage}}" alt="" class="img-fluid">
+        </div>
+        <div class="col">
+          <h6><strong>Réponse de l'enfant</strong></h6>
+          {{choice.valeur == 0 ? "Oui" : (choice.valeur == 1 ? "Non" : "Je ne sais pas")}}
+        </div>
+        <div class="col">
+          <h6><strong>Type de filtre</strong></h6>
+          {{choice.nom}}
+        </div>
+        <div class="col">
+          <h6><strong>Commentaire</strong></h6>
+          <div class="input-group">
+            <textarea (blur)="onBlur($event, i)" rows="5">{{choice.commentaire}}</textarea>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-info mt-3" (click)="onSaveChoix()">Sauvegarder</button>
+    </div>
+
+    <div class="container p-3">
+      <button class="btn btn-primary" (click)="onBackJeux(afficherListeJeux)">Retour liste jeux</button>
+    </div>
+  </div>
+</div>

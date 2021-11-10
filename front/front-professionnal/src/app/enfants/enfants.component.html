@@ -1,0 +1,18 @@
+<div class="jumbotron">
+  <h2><strong>Les Enfants</strong></h2>
+  <hr>
+  <app-enfant-recherche></app-enfant-recherche>
+  <div class="container">  
+    <hr>
+    <h4>Cliquez sur un enfant pour en voir les détails</h4>
+    <ul class="list-group">
+      <li class="list-group-item my-1" *ngFor="let enfant of enfants">
+        <a routerLink="/detail/{{enfant._id}}">
+          <span class="badge">{{enfant.nom}}  {{enfant.prenom}}</span>
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <button class="btn btn-primary" routerLink="/inscription">Inscrire un enfant</button>
+  </div>
+</div>

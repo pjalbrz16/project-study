@@ -1,0 +1,17 @@
+<blockquote>
+<h2>Tu as choisi la catégorie {{choixCat}} !</h2>
+<footer class="blockquote-footer"><h3>Quelles habitudes sont présentes dans ta vie quotidienne ?</h3></footer>
+</blockquote>
+<!--<ul *ngFor="let image of tabImagesCategorie">
+<li>
+    <img [src]="image">
+</li>
+</ul>-->
+<img [src]="tabImagesCategorie[indexImage] "class="rounded-circle img-fluid">
+<div class="reponse">
+    <button class="btn btn-success align-content-center" (click)="onOui()">Oui</button>
+    <button class="btn btn-danger align-content-center" (click)="onNon()">Non</button>
+    <button class="btn btn-warning align-content-center" (click)="onJeVoudrais()">Je voudrais</button>
+</div>
+<!--<p><ngb-progressbar type="success" [value]="[indexImage]*(100/[tabImagesCategorie.length])" [striped]="true"></ngb-progressbar></p>-->
+<!--<button routerLink="/partie"> Jouer</button> -->

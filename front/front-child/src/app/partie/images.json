@@ -1,0 +1,22 @@
+[
+    {
+      "id": 0,
+      "nom": "https://placehold.it/350x349",
+      "categorie": "sport"
+    },
+    {
+      "id": 1,
+      "nom": "https://placehold.it/350x349",
+      "categorie": "sport"
+    },
+    {
+      "id": 2,
+      "nom": "https://placehold.it/350x349",
+      "categorie": "sport"
+    },
+    {
+      "id": 3,
+      "nom": "https://placehold.it/350x349",
+      "categorie":"sport"
+    }
+  ]

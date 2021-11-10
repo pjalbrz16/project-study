@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <form>
+        <div class="form-row">
+            <div class="form-group">
+                <div>Nom de famille</div>
+                <div class="col-sm-10">
+
+                    <input type="text" #nom>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>Prénom</div>
+                <div class="col-sm-10">
+                    <input type="text" #prenom>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div>Mot de passe</div>
+            <input type="text" #pswd>
+        </div>
+
+        <div class="form-group">
+            <label>Profession
+                <div class="col-sm-10">
+                    <select class="custom-select" #prof>
+                        <option *ngFor='let prof of professions' [value]="prof">{{prof}}</option>
+                    </select>
+                </div>
+            </label>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <div>Telephone</div>
+                    <input type="text" #tel>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <div>E-mail</div>
+                    <input type="text" #email>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <label>Rôle
+                <select class="custom-select" #role (change)="formParent(role.value)">
+                    <option *ngFor='let rol of roles' [value]="rol">{{rol}}</option>
+                </select>
+            </label>
+        </div>
+
+        <form *ngIf="isParent">
+            <p>Veuillez sélectionner l'enfant</p>
+            <app-enfant-parent-recherche (messageEvent)="recevoirIdEnfant($event)"></app-enfant-parent-recherche>
+            <!--<p>id: {{idEnfantParent}}</p>-->
+        </form>
+
+        <p>
+            <button class="btn btn-primary" (click)="add(nom.value, prenom.value, pswd.value, prof.value, tel.value, email.value, role.value,role.value);
+            nom.value ='';
+            prenom.value='';
+            pswd.value='';
+            prof.value='';
+            tel.value=''; 
+            email.value=''; 
+
+            ">
+                Valider</button>
+        </p>
+    </form>
+</div>

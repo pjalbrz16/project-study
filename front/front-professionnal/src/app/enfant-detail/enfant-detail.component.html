@@ -1,0 +1,160 @@
+<div class="container">
+  <div *ngIf="enfant" class="container">
+
+    <h2>{{enfant.nom | uppercase}} </h2>
+    <div class="row">
+      <div class="col input-group input-group-sm p-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="nom">Nom</span>
+        </div>
+        <input [(ngModel)]="enfant.nom" placeholder="nom" />
+      </div>
+      <div class="col input-group input-group-sm p-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="nom">Prénom</span>
+        </div>
+        <input [(ngModel)]="enfant.prenom" placeholder="prenom" />
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col input-group input-group-sm p-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="nom">Date de naissance</span>
+        </div>
+        <input type="date" [(ngModel)]="enfant.date_naissance" placeholder="Date de naissance" />
+      </div>
+      <div class="col input-group input-group-sm p-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="nom">Langue usuelle</span>
+        </div>
+        <input [(ngModel)]="enfant.langue_usuelle" placeholder="Langue usuelle" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col input-group input-group-sm p-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="nom">Dominance</span>
+        </div>
+        <select [(ngModel)]='enfant.dominance'>
+          <option *ngFor='let dom of dominances' [value]="dom">{{dom}}</option>
+        </select>
+      </div>
+      <div class="col input-group input-group-sm p-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="nom">Scolarité</span>
+        </div>
+        <select [(ngModel)]='enfant.scolarite.enseignement' name='enseignement'>
+          <option *ngFor='let scolarite of scolaritees' [value]="scolarite">{{scolarite}}</option>
+        </select>
+
+        <div *ngIf="enfant.scolarite.enseignement == 'integration' || enfant.scolarite.enseignement == 'specialise'">
+          Type: <input [(ngModel)]="enfant.scolarite.type" placeholder="Type" />
+        </div>
+        Niveau: <input [(ngModel)]="enfant.scolarite.niveau" placeholder="Niveau" />
+
+      </div>
+
+
+
+    </div>
+    <div class="container">
+      <h3>Contacts</h3>
+      <div *ngFor="let contact of enfant.contacts; let i=index" name="info_contact" class="container">
+        <h4>Contact n° : {{i+1}}</h4>
+        <div class="row">
+          <div class="col">
+            <label>Prenom</label>
+            <input [(ngModel)]="contact.prenom" placeholder="Contacts" name="prenom" />
+          </div>
+          <div class="col">
+            <label>Nom</label>
+            <input [(ngModel)]="contact.nom" placeholder="Contacts" name="nom" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Telephone</label>
+            <input type="tel" [(ngModel)]="contact.telephone" name="telephone">
+          </div>
+          <div class="col">
+            <label>Email</label>
+            <input type="email" [(ngModel)]="contact.email" name="email">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Relation</label>
+            <select [(ngModel)]='contact.relation' name='relation_contact'>
+              <option *ngFor='let relation of relations' [value]='relation'>{{relation}}</option>
+            </select>
+          </div>
+        </div>
+        <span class="btn btn-danger" (click)="supprimerContact(i)">Supprimer</span>
+      </div>
+
+    </div>
+    <div class="container mt-3">
+      <div *ngFor="let obj of dataarray; let i=index" name="info_contact_plus">
+        <label>Prenom</label>
+        <input [(ngModel)]="obj.prenom" placeholder="Contacts" name="prenom{{i}}" />
+
+        <label>Nom</label>
+        <input [(ngModel)]="obj.nom" placeholder="Contacts" name="nom{{i}}" />
+
+        <label>Telephone</label>
+        <input type="tel" [(ngModel)]="obj.telephone" name="telephone{{i}}">
+
+        <label>Email</label>
+        <input type="email" [(ngModel)]="obj.email" name="email{{i}}">
+
+        <label>Role</label>
+        <select name='relation_contact'>
+          <option *ngFor='let relation of relations' [value]='relation'>{{relation}}</option>
+        </select>
+        <span class="btn btn-danger" (click)="supprimerChamp(i)">Supprimer</span>
+      </div>
+      <span class="btn btn-primary" (click)="ajouterContact()">Ajouter contact</span>
+    </div>
+    <h3>Besoins</h3>
+    <div class="row" *ngFor="let besoin of besoins">
+      <div class="col-sm-auto">
+        <input type='checkbox' name="besoins" value="{{besoin}}" [checked]="enfant.besoins.indexOf(besoin)>=0" />
+      </div>
+      <div class="col-sm-auto">{{besoin}}</div>
+
+
+    </div>
+    <div class="container">
+      <h4>Changer de professionnel : (en cours = {{professionnelEnCours.prenom}} {{professionnelEnCours.nom}})</h4>
+
+      <!--<input [(ngModel)]="enfant.professionnel" placeholder="Professionnel en charge" />-->
+      <label>Nouveau professionnel : </label>
+      <select [(ngModel)]="selectedProfessionnel" name="profe">
+        <option *ngFor="let pro of professionnels" [value]="pro._id">{{pro.prenom}} {{pro.nom}}</option>
+      </select>
+
+      <!--
+            <select name='relation_contact'>
+                    <option *ngFor='let relation of relations' [value]='relation'>{{relation}}</option>
+                </select>
+        -->
+
+    </div>
+    <div class="row m-3">
+      <div class="col">
+        <button (click)="modifEnfant()">Sauvegarder les modifications</button>
+      </div>
+      <div class="col">
+        <button (click)="deleteEnfant()">Supprimer l'enfant</button>
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <div class="col">
+        <button (click)="goBack()">Revenir en arrière</button>
+      </div>
+    </div>
+  </div>
+</div>
